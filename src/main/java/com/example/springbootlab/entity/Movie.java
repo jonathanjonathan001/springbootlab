@@ -18,6 +18,7 @@ public class Movie {
     private int year;
 
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
 }
