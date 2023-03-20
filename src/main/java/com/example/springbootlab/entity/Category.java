@@ -18,7 +18,7 @@ public class Category {
 
     private String name;
 
-    @OneToMany(mappedBy="category")
+    @OneToMany(mappedBy="categoryId")
     private List<Movie> movies;
 
 }
