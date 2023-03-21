@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -12,13 +14,23 @@ public class SecurityConfig {
 
 @Bean
 public SecurityFilterChain filterChain (HttpSecurity httpSecurity) throws Exception {
-    httpSecurity.formLogin()
+    httpSecurity
+            .csrf()
+            .ignoringRequestMatchers("/register")
+            .and()
+            .formLogin()
             .and()
             .authorizeHttpRequests()
-            .requestMatchers(HttpMethod.GET,"/movies/**").authenticated()
+            .requestMatchers(HttpMethod.POST, "/register").permitAll()
+            .requestMatchers("/showPersons").authenticated()
             .anyRequest().denyAll();
+
     return httpSecurity.build();
 
+}
+@Bean
+public PasswordEncoder passwordEncoder(){
+    return new BCryptPasswordEncoder();
 }
 
 }

@@ -2,6 +2,8 @@ package com.example.springbootlab.security;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 public class UserCredentials {
     @Id
@@ -10,6 +12,9 @@ public class UserCredentials {
     @Column(unique = true)
     private String name;
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     public String getName() {
         return name;
