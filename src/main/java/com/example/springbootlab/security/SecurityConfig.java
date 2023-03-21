@@ -22,7 +22,7 @@ public SecurityFilterChain filterChain (HttpSecurity httpSecurity) throws Except
             .and()
             .authorizeHttpRequests()
             .requestMatchers(HttpMethod.POST, "/register").permitAll()
-            .requestMatchers("/showPersons").authenticated()
+            .requestMatchers("/movies").authenticated()
             .anyRequest().denyAll();
 
     return httpSecurity.build();
