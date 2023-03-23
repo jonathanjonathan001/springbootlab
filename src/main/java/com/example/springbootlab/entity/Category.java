@@ -19,6 +19,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy="categoryId", fetch = FetchType.EAGER)
+    @JsonBackReference
     private List<Movie> movies;
 
 }
