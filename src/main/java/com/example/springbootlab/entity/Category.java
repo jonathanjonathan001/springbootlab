@@ -3,6 +3,7 @@ package com.example.springbootlab.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.util.List;
 
@@ -18,7 +19,8 @@ public class Category {
 
     private String name;
 
-    @OneToMany(mappedBy="categoryId")
+    @OneToMany(mappedBy="categoryId", fetch = FetchType.EAGER)
+    @JsonBackReference
     private List<Movie> movies;
 
 }
