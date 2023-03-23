@@ -30,7 +30,7 @@ class MovieControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-   ObjectMapper objectMapper = new ObjectMapper();
+    ObjectMapper objectMapper = new ObjectMapper();
 
     @MockBean
     private MovieRepository repo;
@@ -39,7 +39,7 @@ class MovieControllerTest {
     private Movie movie2;
 
     @BeforeEach
-    void init(){
+    void init() {
         movie1 = new Movie();
         movie1.setId(1L);
         movie1.setName("The Lord of the Rings");
@@ -49,31 +49,27 @@ class MovieControllerTest {
         movie2.setId(2L);
         movie2.setName("Transformers");
         movie2.setYear(2007);
-
     }
 
 
-   @Test
+    @Test
     void shouldCreateNewMovie() throws Exception {
 
         when(repo.save(any(Movie.class))).thenReturn(movie1);
 
         mockMvc.perform(post("/movies")
-                .contentType(String.valueOf(MediaType.APPLICATION_JSON))
-                .content(objectMapper.writeValueAsString(movie1)))
+                        .contentType(String.valueOf(MediaType.APPLICATION_JSON))
+                        .content(objectMapper.writeValueAsString(movie1)))
                 .andExpect(status().isOk())
                 .andDo(print());
-
-
     }
 
     @Test
     void getAllMoviesShouldReturnAllMoviesAnd200Ok() throws Exception {
 
-        when(repo.findAll()).thenReturn(List.of(movie1,movie2));
+        when(repo.findAll()).thenReturn(List.of(movie1, movie2));
         mockMvc.perform(get("/movies")).andExpect(status().isOk())
                 .andDo(print());
-
     }
 
     @Test
@@ -82,19 +78,25 @@ class MovieControllerTest {
         when(repo.findById(1L)).thenReturn(Optional.of(movie1));
         mockMvc.perform(get("/movies/1")).andExpect(status().isOk())
                 .andDo(print());
-
     }
 
-   @Test
+    @Test
+    void shouldUpdateMovie() throws Exception {
+        when(repo.findById(1L)).thenReturn(Optional.of(movie1));
+
+        mockMvc.perform(put("/movies/{id}", 1L)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(movie1)))
+                .andExpect(status().isOk()).andDo(print());
+    }
+
+    @Test
     void shouldDeleteMovie() throws Exception {
 
-       doNothing().when(repo).deleteById(anyLong());
-       mockMvc.perform(delete("/movies/{id}",1L))
-               .andExpect(status().isOk())
-               .andDo(print());
-   }
-
-
-
+        doNothing().when(repo).deleteById(anyLong());
+        mockMvc.perform(delete("/movies/{id}", 1L))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
 
 }
