@@ -46,8 +46,8 @@ public class MovieController {
     }
 
     @DeleteMapping(value = "/{id}")
-    void deleteMovieById(@PathVariable Movie id) {
-        repo.delete(id);
+    void deleteMovieById(@PathVariable Long id) {
+        repo.deleteById(id);
     }
 
 }
