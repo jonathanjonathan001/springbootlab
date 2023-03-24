@@ -6,6 +6,7 @@ import com.example.springbootlab.repository.CategoryRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -33,15 +34,14 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     Optional<Category> getOneCategory(@PathVariable long id) {
-        return categoryRepository.findById(id);
+        return Optional.of(categoryRepository.findById(id).orElseThrow());
 
     }
 
 
-
     @PutMapping("/{id}")
     Category updateCategory(@RequestBody Category category, @PathVariable long id) {
-        var updateCategory = categoryRepository.findById(id).orElseThrow(() -> new NullPointerException("That CategoryId does not exist!" ));
+        var updateCategory = categoryRepository.findById(id).orElseThrow();
         updateCategory.setName(category.getName());
         updateCategory.setMovies(category.getMovies());
 
@@ -49,12 +49,16 @@ public class CategoryController {
 
     }
 
+
     @DeleteMapping("/{id}")
     String deleteCategory(@PathVariable long id) {
-
-            categoryRepository.deleteById(id);
+        try {
+            Category category = categoryRepository.findById(id).orElseThrow(NoSuchElementException::new);
+            categoryRepository.delete(category);
             return "Category " + id + " was deleted!";
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException();
+        }
     }
-
 
 }
