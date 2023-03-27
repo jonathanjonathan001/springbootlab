@@ -16,7 +16,7 @@ public class WebController {
 
     @GetMapping("/showmovies")
     public String showMovies(Model model) {
-        model.addAttribute(movieRepository.findAll());
+        model.addAttribute("allMovies", movieRepository.findAll());
         return "movies";
     }
 

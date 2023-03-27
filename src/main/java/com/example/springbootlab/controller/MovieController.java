@@ -40,7 +40,7 @@ public class MovieController {
         Movie updateMovie = repo.findById(id).orElseThrow(() -> new ResolutionException("Movie not exist with id: " + id));
         updateMovie.setName(movie.getName());
         updateMovie.setYear(movie.getYear());
-
+        updateMovie.setCategory(movie.getCategory());
         repo.save(updateMovie);
         return ResponseEntity.ok(updateMovie);
     }
