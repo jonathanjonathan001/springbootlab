@@ -6,8 +6,8 @@ import com.example.springbootlab.repository.MovieRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.module.ResolutionException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -32,12 +32,12 @@ public class MovieController {
 
     @GetMapping("/{id}")
     Optional<Movie> getOneMovie(@PathVariable long id) {
-        return repo.findById(id);
+        return Optional.of(repo.findById(id).orElseThrow());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable long id, @RequestBody Movie movie) {
-        Movie updateMovie = repo.findById(id).orElseThrow(() -> new ResolutionException("Movie not exist with id: " + id));
+        Movie updateMovie = repo.findById(id).orElseThrow();
         updateMovie.setName(movie.getName());
         updateMovie.setYear(movie.getYear());
         updateMovie.setCategory(movie.getCategory());
@@ -46,8 +46,14 @@ public class MovieController {
     }
 
     @DeleteMapping(value = "/{id}")
-    void deleteMovieById(@PathVariable Movie id) {
-        repo.delete(id);
-    }
+    String deleteMovieById(@PathVariable long id) {
 
+        try {
+            Movie movie = repo.findById(id).orElseThrow(NoSuchElementException::new);
+            repo.delete(movie);
+            return "Movie " + id + " was deleted!";
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException();
+        }
+    }
 }
