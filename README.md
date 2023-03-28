@@ -2,13 +2,13 @@
 <section>
 </div>
 <div align="center">
-    <a href="https://github.com/fungover/haze/issues">
+    <a href="https://github.com/jonathanjonathan001/springbootlab/issues">
         <img src="https://img.shields.io/github/issues-raw/jonathanjonathan001/springbootlab" alt="Open issues workflow badge"/>
     </a>
-    <a href="https://github.com/fungover/haze/pulls">
+    <a href="https://github.com/jonathanjonathan001/springbootlab/pulls">
         <img src="https://img.shields.io/github/issues-pr/jonathanjonathan001/springbootlab" alt="Pull request workflow badge"/>
     </a>
-    <a href="https://github.com/fungover/haze/issues?q=is%3Aissue+is%3Aclosed">
+    <a href="https://github.com/jonathanjonathan001/springbootlab/issues?q=is%3Aissue+is%3Aclosed">
         <img src="https://img.shields.io/github/issues-closed-raw/jonathanjonathan001/springbootlab" alt="Open issues workflow badge"/>
     </a>
     <div align="center">
