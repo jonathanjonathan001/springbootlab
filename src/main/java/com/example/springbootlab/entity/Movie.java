@@ -19,6 +19,6 @@ public class Movie {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Category categoryId;
+    private Category category;
 
 }
