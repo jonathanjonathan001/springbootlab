@@ -1,6 +1,5 @@
 
 <section>
-</div>
 <div align="center">
     <a href="https://github.com/jonathanjonathan001/springbootlab/issues">
         <img src="https://img.shields.io/github/issues-raw/jonathanjonathan001/springbootlab" alt="Open issues workflow badge"/>
