@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+</head>
+<body>
+<p>These are the movies in our database:</p>
+<table>
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Year</td>
+        <td>Category</td>
+    </tr>
+    <tr th:each="movies: ${allMovies}">
+        <td th:text="${movies.getId()}"></td>
+        <td th:text="${movies.getName()}"></td>
+        <td th:text="${movies.getYear()}"></td>
+        <td th:text="${movies.getCategory().getName()}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
