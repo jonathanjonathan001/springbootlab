@@ -10,10 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 
@@ -93,11 +90,12 @@ class MovieControllerTest {
     @Test
     void shouldDeleteMovie() throws Exception {
 
-        doNothing().when(repo).deleteById(anyLong());
-        mockMvc.perform(delete("/movies/{id}", 1L))
+        when(repo.findById(1L)).thenReturn(Optional.of(movie1));
+        mockMvc.perform(delete("/movies/{id}", 1L)
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(movie1)))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
 
 }
-
