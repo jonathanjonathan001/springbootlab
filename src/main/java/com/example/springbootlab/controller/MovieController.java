@@ -47,7 +47,6 @@ public class MovieController {
 
     @DeleteMapping(value = "/{id}")
     String deleteMovieById(@PathVariable long id) {
-
         try {
             Movie movie = repo.findById(id).orElseThrow(NoSuchElementException::new);
             repo.delete(movie);
@@ -57,3 +56,4 @@ public class MovieController {
         }
     }
 }
+
