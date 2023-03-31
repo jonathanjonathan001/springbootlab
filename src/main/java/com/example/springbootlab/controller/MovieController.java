@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/movies")
+@RequestMapping("/api/movies")
 public class MovieController {
 
     MovieRepository repo;
