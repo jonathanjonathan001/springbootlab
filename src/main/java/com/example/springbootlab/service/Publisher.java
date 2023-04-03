@@ -69,4 +69,13 @@ public class Publisher {
         return container;
     }
 
+    @Bean
+    public SimpleMessageListenerContainer container2(ConnectionFactory connectionFactory) {
+        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+        container.setQueueNames(EMAIL_QUEUE);
+        container.setMessageListener(message -> System.out.println("Message: " + new String(message.getBody())));
+        return container;
+    }
+
 }
