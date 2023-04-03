@@ -1,6 +1,7 @@
 package com.example.springbootlab.controller;
 
 
+import com.example.springbootlab.entity.Movie;
 import com.example.springbootlab.service.Publisher;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,18 +20,10 @@ public class MessageController {
 
 
     @PostMapping
-    public void postMessage(@RequestBody String message) {
-        publisher.publishMessage(message);
-
-
+    public void postMessage(@RequestBody Movie movie) {
+        publisher.publishMessage(movie);
 
         }
 
-//        @PostMapping
-//    public void postEmail(@RequestBody String email) {
-//            publisher.publishEmail(email);
-//
-//        }
-//
 
 }
