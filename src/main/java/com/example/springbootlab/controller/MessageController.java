@@ -20,10 +20,8 @@ public class MessageController {
 
 
     @PostMapping
-    public void postMessage(@RequestBody String message) {
-        publisher.publishMessage(message);
-
-
+    public void postMessage(@RequestBody Movie movie) {
+        publisher.publishMessage(movie);
 
         }
 
