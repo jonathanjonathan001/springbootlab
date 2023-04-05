@@ -1,6 +1,5 @@
 package com.example.springbootlab.security;
 
-import com.example.springbootlab.security.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,11 +12,11 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
-
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public SecurityConfig(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Bean
     @Order(1)
@@ -41,11 +40,9 @@ public class SecurityConfig {
 
 
     @Bean
-    // @Order(2)
+    @Order(2)
     public SecurityFilterChain filterChainForWeb(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf()
-                .disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/showmovies").authenticated()
                 .anyRequest().denyAll()

@@ -10,6 +10,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NamedEntityGraph(name = "Category.movie",
+        attributeNodes = @NamedAttributeNode("movies"))
 public class Category {
 
 
