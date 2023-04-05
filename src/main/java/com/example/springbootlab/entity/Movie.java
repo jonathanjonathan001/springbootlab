@@ -7,6 +7,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@NamedEntityGraph(name = "Movie.category",
+        attributeNodes = @NamedAttributeNode("category"))
 public class Movie {
 
     @Id
